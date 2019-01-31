@@ -18,14 +18,48 @@
 
 <body>
   <section id="layoutWrapper">
+    <!-- Side Navigation-->
+    <nav id="sideNavigation">
+      <h1>Lenite Behncke</h1>
+      <ul>
+        <li class="active">
+          <a href="calendar_month.html">
+            <img src="assets/calendarIconActive.png" />
+            <span>Calendar</span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <img src="assets/equestrian.png" />
+            <span>Equestrians</span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <img src="assets/horse.png" />
+            <span>Horeses</span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <img src="assets/logout.png" alt="Logout">
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Header mobile -->
     <div id="header">
-      <a id="toggleNavigation">
+      <a id="toggleNavigation" onclick="toggleNavigation();">
         <span class="iconBar"></span>
         <span class="iconBar"></span>
         <span class="iconBar"></span>
       </a>
       <h1 class="colorRose">Calendar</h1>
     </div>
+
+    <!-- Actual calendar-->
     <div id="calendarWrapper">
       <header>
         <h5>2019</h5>
@@ -94,6 +128,16 @@
       </div>
     </div>
   </section>
+
+  <script>
+    const toggleNavigation = () => {
+      const sideNavigation = document.getElementById("sideNavigation");
+      const navigationButton = document.getElementById("toggleNavigation");
+
+      sideNavigation.classList.toggle("open");
+      navigationButton.classList.toggle("open");
+    }
+  </script>
 </body>
 
 </html>
