@@ -1,0 +1,49 @@
+/***** Style header *****/
+#layoutWrapper #header {
+  grid-area: header;
+  
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+#header #toggleNavigation .iconBar {
+  display: block;
+  height: 2px;
+  width: 20px;
+  margin-top: 3px;
+  background-color: #CBC7C7;
+}
+
+#header #toggleNavigation .iconBar:first-of-type {
+  width: 15px;
+  margin-top: 0;
+}
+
+#header h1 {
+  justify-self: center;
+  margin: 0 0 0 -20px;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+@media(max-width: 349px) {
+  #layoutWrapper #header {
+    padding: 20px 15px;
+  }
+
+  #header h1 {
+    font-size: 1em;
+  }
+}
+
+@media(min-width: 350px) {
+  #layoutWrapper #header {
+    padding: 30px 25px;
+  }
+
+  #header h1 {
+    font-size: 1.3em;
+  }
+}

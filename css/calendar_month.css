@@ -1,0 +1,121 @@
+/***** Style calendar ******/
+#layoutWrapper #calendarWrapper {
+  grid-area: calendar;
+}
+
+/***** Style calendar header *****/
+#calendarWrapper header > * {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+#calendarWrapper header h5 {
+  font-weight: 400;
+  color: #868686;
+}
+
+#calendarWrapper header h3 {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/***** Style calendar grid *****/
+#calendarWrapper #calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 20px);
+  grid-row-gap: 15px;
+  justify-items: center;
+}
+
+#calendarWrapper #calendarGrid .calendarTitle, #calendarWrapper #calendarGrid .calendarDay {
+  font-family: "Open Sans", sans-serif;
+  color: #868686;
+}
+
+#calendarWrapper #calendarGrid .calendarDay {
+  font-weight: 300;
+}
+
+#calendarWrapper #calendarGrid .calendarDay.active {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  background-color: #EF9BD1;
+}
+
+/***** Style calendar cards *****/
+#calendarWrapper #calendarCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 25px;
+  grid-template-rows: repeat(auto, auto);
+  grid-row-gap: 25px;
+}
+
+#calendarCards .slotCard {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+#calendarCards .slotCard span {
+  display: block;
+  margin-bottom: 3px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  color: #868686;
+}
+
+#calendarCards .slotCard span:last-of-type {
+  margin-bottom: 0;
+}
+
+@media(max-width: 349px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 0 15px;
+  }
+
+  #calendarWrapper #calendarGrid {
+    margin: 20px 0;
+  }
+
+  #calendarWrapper #calendarGrid .calendarTitle, #calendarWrapper #calendarGrid .calendarDay {
+    font-size: 14px;
+  }
+
+  #calendarCards .slotCard {
+    padding: 10px;
+  }
+
+  #calendarCards .slotCard span {
+    font-size: 14px;
+  }
+}
+
+@media(min-width: 350px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 0 25px;
+  }
+
+  #calendarWrapper #calendarGrid {
+    margin: 40px 0;
+  }
+
+  #calendarWrapper #calendarGrid .calendarTitle {
+    font-size: 14px;
+  }
+
+  #calendarWrapper #calendarGrid .calendarDay {
+    font-size: 16px;
+  }
+
+  #calendarCards .slotCard {
+    padding: 10px 15px;
+  }
+
+  #calendarCards .slotCard span {
+    font-size: 16px;
+  }
+}
