@@ -94,7 +94,7 @@
   }
 }
 
-@media(min-width: 350px) {
+@media(min-width: 350px) and (max-width: 999px) {
   #layoutWrapper #calendarWrapper {
     padding: 0 25px;
   }
@@ -117,5 +117,66 @@
 
   #calendarCards .slotCard span {
     font-size: 16px;
+  }
+}
+
+@media(min-width: 1000px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 50px;
+  }
+
+  #layoutWrapper #calendarWrapper > header{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    letter-spacing: 0.5px;
+  }
+
+  #layoutWrapper #calendarWrapper .switchTime {
+    width: 130px;
+    text-align: center;
+  }
+
+  #calendarWrapper .switchTime > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #calendarWrapper .switchTime img:first-of-type {
+    transform: rotate(180deg);
+  }
+
+  #calendarWrapper .switchTime img {
+    height: 15px;
+  }
+
+  #calendarWrapper .switchTime h3, #calendarWrapper .switchTime h5 {
+    margin: 0;
+  }
+
+  #calendarWrapper .switchTime h3 {
+    color: #868686;
+  }
+
+  #calendarWrapper .switchTime h5 {
+    color: #B4B4B4;
+  }
+
+  #calendarWrapper #switchView {
+    background-color: #F8F8F8;
+    border-radius: 20px;
+  }
+
+  #calendarWrapper #switchView div {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 5px 15px;
+    cursor: pointer;
+  }
+
+  #calendarWrapper #switchView div.active {
+    background-color: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
   }
 }
