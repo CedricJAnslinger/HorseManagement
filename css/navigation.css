@@ -8,6 +8,10 @@
     align-items: center;
   }
 
+  #header #toggleNavigation {
+    z-index: 10;
+  }
+
   #header #toggleNavigation .iconBar {
     display: block;
     height: 2px;
