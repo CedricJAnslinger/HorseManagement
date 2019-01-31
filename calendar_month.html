@@ -62,10 +62,30 @@
     <!-- Actual calendar-->
     <div id="calendarWrapper">
       <header>
-        <h5>2019</h5>
-        <h3 class="colorRose">January</h3>
+        <!-- Content mobile-->
+        <div class="hidden-desktop">
+          <h5>2019</h5>
+          <h3 class="colorRose">January</h3>
+        </div>
+
+        <!-- Content desktop -->
+        <h1 class="colorRose hidden-mobile">Calendar</h1>
+
+        <div class="switchTime hidden-mobile">
+          <div>
+            <img src="assets/switchMonthIcon.png" />
+            <h3>January</h3>
+            <img src="assets/switchMonthIcon.png" />
+          </div>
+          <h5>2019</h5>
+        </div>
+
+        <div id="switchView" class="hidden-mobile">
+          <div class="colorRose">Week</div>
+          <div class="colorRose active">Month</div>
+        </div>
       </header>
-      <div id="calendarGrid">
+      <div class="hidden-desktop" id="calendarGrid">
         <div class="calendarTitle">Mon</div>
         <div class="calendarTitle">Tue</div>
         <div class="calendarTitle">Wed</div>
@@ -109,7 +129,7 @@
         <a class="calendarDay">31</a>
         <a class="calendarDay">1</a>
       </div>
-      <div id="calendarCards">
+      <div class="hidden-desktop" id="calendarCards">
         <div class="slotCard" style="background-color: #E0FFF2;">
           <span>Parvenuee</span>
           <span>Lenita B.</span>
