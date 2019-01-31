@@ -1,6 +1,6 @@
 /***** Style calendar ******/
 #layoutWrapper #calendarWrapper {
-  grid-area: calendar;
+  grid-area: content;
 }
 
 /***** Style calendar header *****/
