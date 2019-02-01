@@ -17,41 +17,47 @@
 </head>
 
 <body>
-  <section id="layoutWrapper">
-    <!-- Side Navigation-->
-    <nav id="sideNavigation">
-      <h1>Lenite Behncke</h1>
-      <ul>
-        <li class="active">
-          <a href="calendar_month.html">
-            <img src="assets/calendarIconActive.png" />
-            <span>Calendar</span>
-          </a>
-        </li>
-        <li>
-          <a>
-            <img src="assets/equestrian.png" />
-            <span>Equestrians</span>
-          </a>
-        </li>
-        <li>
-          <a>
-            <img src="assets/horse.png" />
-            <span>Horeses</span>
-          </a>
-        </li>
-        <li>
-          <a>
-            <img src="assets/logout.png" alt="Logout">
-            <span>Logout</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
 
+  <!-- Side Navigation-->
+  <nav id="sideNavigation">
+    <a id="toggleNavigationTablet" class="toggleNavigation" onclick="toggleNavigation();">
+      <span class="iconBar"></span>
+      <span class="iconBar"></span>
+      <span class="iconBar"></span>
+    </a>
+    <h1>Lenite Behncke</h1>
+    <ul>
+      <li class="active">
+        <a href="calendar_month.html">
+          <img src="assets/calendarIconActive.png" />
+          <span>Calendar</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <img src="assets/equestrian.png" />
+          <span>Equestrians</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <img src="assets/horse.png" />
+          <span>Horeses</span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <img src="assets/logout.png" alt="Logout">
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section id="layoutWrapper">
     <!-- Header mobile -->
-    <div id="header">
-      <a id="toggleNavigation" onclick="toggleNavigation();">
+    <div id="headerMobile">
+      <a id="toggleNavigationMobile" class="toggleNavigation" onclick="toggleNavigation();">
         <span class="iconBar"></span>
         <span class="iconBar"></span>
         <span class="iconBar"></span>
@@ -59,91 +65,607 @@
       <h1 class="colorRose">Calendar</h1>
     </div>
 
-    <!-- Actual calendar-->
+    <!-- Calendar -->
     <div id="calendarWrapper">
       <header>
-        <!-- Content mobile-->
-        <div class="hidden-desktop">
-          <h5>2019</h5>
-          <h3 class="colorRose">January</h3>
-        </div>
+        <h1 class="colorRose">Calendar</h1>
 
-        <!-- Content desktop -->
-        <h1 class="colorRose hidden-mobile">Calendar</h1>
-
-        <div class="switchTime hidden-mobile">
-          <div>
-            <img src="assets/switchMonthIcon.png" />
-            <h3>January</h3>
-            <img src="assets/switchMonthIcon.png" />
+        <div id="calendarSwitchTime">
+          <h5 class="yearMobile">2019</h5>
+          <div class="calendarSwitchTimeMonth">
+            <img class="switchMonth yearDesktop" src="assets/switchMonthIcon.png" />
+            <h3 class="colorRose">January</h3>
+            <img class="switchMonth yearDesktop" src="assets/switchMonthIcon.png" />
           </div>
-          <h5>2019</h5>
+          <h5 class="yearDesktop">2019</h5>
         </div>
 
-        <div id="switchView" class="hidden-mobile">
+        <div id="calendarSwitchView">
           <div class="colorRose">Week</div>
           <div class="colorRose active">Month</div>
         </div>
+
       </header>
-      <div class="hidden-desktop" id="calendarGrid">
-        <div class="calendarTitle">Mon</div>
-        <div class="calendarTitle">Tue</div>
-        <div class="calendarTitle">Wed</div>
-        <div class="calendarTitle">Thu</div>
-        <div class="calendarTitle">Fri</div>
-        <div class="calendarTitle">Sat</div>
-        <div class="calendarTitle">Sun</div>
-        <a class="calendarDay">29</a>
-        <a class="calendarDay">30</a>
-        <a class="calendarDay">31</a>
-        <a class="calendarDay">1</a>
-        <a class="calendarDay">2</a>
-        <a class="calendarDay">3</a>
-        <a class="calendarDay">4</a>
-        <a class="calendarDay">5</a>
-        <a class="calendarDay">6</a>
-        <a class="calendarDay">7</a>
-        <a class="calendarDay active">8</a>
-        <a class="calendarDay">9</a>
-        <a class="calendarDay">10</a>
-        <a class="calendarDay">11</a>
-        <a class="calendarDay">12</a>
-        <a class="calendarDay">13</a>
-        <a class="calendarDay">14</a>
-        <a class="calendarDay">15</a>
-        <a class="calendarDay">16</a>
-        <a class="calendarDay">17</a>
-        <a class="calendarDay">18</a>
-        <a class="calendarDay">19</a>
-        <a class="calendarDay">20</a>
-        <a class="calendarDay">21</a>
-        <a class="calendarDay">22</a>
-        <a class="calendarDay">23</a>
-        <a class="calendarDay">24</a>
-        <a class="calendarDay">25</a>
-        <a class="calendarDay">26</a>
-        <a class="calendarDay">27</a>
-        <a class="calendarDay">28</a>
-        <a class="calendarDay">29</a>
-        <a class="calendarDay">30</a>
-        <a class="calendarDay">31</a>
-        <a class="calendarDay">1</a>
-      </div>
-      <div class="hidden-desktop" id="calendarCards">
-        <div class="slotCard" style="background-color: #E0FFF2;">
-          <span>Parvenuee</span>
-          <span>Lenita B.</span>
-          <span>Jan-Cedric A.</span>
+      <div id="calendar">
+        <!-- Calendar header -->
+        <div id="calendarHeader">
+          <div>
+            <span class="calendarHeaderMobile">Mon</span>
+            <span class="calendarHeader">Monday</span>
+          </div>
+          <div>
+            <span class="calendarHeaderMobile ">Tue</span>
+            <span class="calendarHeader">Tuesday</span>
+          </div>
+          <div>
+            <span class="calendarHeaderMobile ">Wed</span>
+            <span class="calendarHeader">Wednesday</span>
+          </div>
+          <div>
+            <span class="calendarHeaderMobile ">Thu</span>
+            <span class="calendarHeader">Thursday</span>
+          </div>
+          <div>
+            <span class="calendarHeaderMobile ">Fri</span>
+            <span class="calendarHeader">Friday</span>
+          </div>
+          <div>
+            <span class="calendarHeaderMobile ">Sat</span>
+            <span class="calendarHeader">Saturday</span>
+          </div>
+          <div>
+            <span class="calendarHeaderMobile ">Sun</span>
+            <span class="calendarHeader">Sunday</span>
+          </div>
         </div>
-        <div class="slotCard" style="background-color: #FFEDFF;">
-          <span>Moccachino</span>
-          <span>Lenita B.</span>
-          <span>Jan-Cedric A.</span>
+
+        <!-- Calendar grid -->
+        <div id="calendarGrid">
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">29</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">30</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">31</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">1</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">2</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">3</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">4</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">5</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">6</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">7</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem active">
+            <span class="calendarItemDate">8</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">9</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">10</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">11</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">12</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">13</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">14</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">15</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">16</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">17</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">18</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">19</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">20</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">21</span>
+            <div class="calendarTimeSlot" style="background-color: #E0FFF2;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #FFEDFF">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot" style="background-color: #E5F5FC;">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">22</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">23</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">24</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">25</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">26</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">27</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">28</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">29</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">30</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">31</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
+          <div class="calendarGridItem">
+            <span class="calendarItemDate">1</span>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+            <div class="calendarTimeSlot">
+              <span>Lenita</span>
+              <span>Jan-Cedric</span>
+            </div>
+          </div>
         </div>
-        <div class="slotCard" style="background-color: #E5F5FC;">
-          <span>Dante</span>
-          <span>Lenita B.</span>
-          <span>Jan-Cedric A.</span>
+
+        <!-- Calendar mobile cards-->
+        <div id="calendarMobileCards" class="">
+          <div class="calendarMobileCard" style="background-color: #E0FFF2;">
+            <span>Parvenuee</span>
+            <span>Lenita B.</span>
+            <span>Jan-Cedric A.</span>
+          </div>
+          <div class="calendarMobileCard" style="background-color: #FFEDFF;">
+            <span>Moccachino</span>
+            <span>Lenita B.</span>
+            <span>Jan-Cedric A.</span>
+          </div>
+          <div class="calendarMobileCard" style="background-color: #E5F5FC;">
+            <span>Dante</span>
+            <span>Lenita B.</span>
+            <span>Jan-Cedric A.</span>
+          </div>
+
         </div>
       </div>
     </div>
@@ -152,10 +674,12 @@
   <script>
     const toggleNavigation = () => {
       const sideNavigation = document.getElementById("sideNavigation");
-      const navigationButton = document.getElementById("toggleNavigation");
+      const navigationButtonMobile = document.getElementById("toggleNavigationMobile");
+      const navigationButtonTablet = document.getElementById("toggleNavigationTablet");
 
       sideNavigation.classList.toggle("open");
-      navigationButton.classList.toggle("open");
+      navigationButtonMobile.classList.toggle("open");
+      navigationButtonTablet.classList.toggle("open");
     }
   </script>
 </body>
