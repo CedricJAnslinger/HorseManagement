@@ -19,12 +19,22 @@ func NewRouter(NFHandler func(http.ResponseWriter, *http.Request), NAHandler fun
 	return &Router{&node, http.HandlerFunc(NFHandler), http.HandlerFunc(NAHandler)}
 }
 
-// Handle adds a new path to our router.
+// HandleFunc converts a func to a http.Handler and calls Handle afterwards
 // @caller - r: *Router(Pointer): Instance of a router to which we add the new path.
 // @param - method: string: The HttpMethod which is getting used for this path.
 // @param - path: string: The path of the node we add to our api.
 // @param - handler: func(http.ResponseWriter, *http.Request): The actual function which is getting executed at this endpoint.
-func (r *Router) Handle(method string, path string, handler func(http.ResponseWriter, *http.Request)) {
+func (r *Router) HandleFunc(method string, path string, handler func(http.ResponseWriter, *http.Request)) {
+	// Use adapter http.HandlerFunc to allow the use of functions as HTTP handlers
+	r.Handle(method, path, http.HandlerFunc(handler))
+}
+
+// Handle adds a new path to our router.
+// @caller - r: *Router(Pointer): Instance of a router to which we add the new path.
+// @param - method: string: The HttpMethod which is getting used for this path.
+// @param - path: string: The path of the node we add to our api.
+// @param - handler: http.Handler: The actual handler which is getting executed at this endpoint.
+func (r *Router) Handle(method string, path string, handler http.Handler) {
 	if len(path) == 0 || path[0] != '/' {
 		log.Fatal("Couldn't add path: ", path, ", path has to start with a /")
 	}
@@ -34,7 +44,7 @@ func (r *Router) Handle(method string, path string, handler func(http.ResponseWr
 		log.Fatal("Couldn't add path: ", path, ", with method ", method, " ,method not supported")
 	}
 	// Use adapter http.HandlerFunc to allow the use of functions as HTTP handlers
-	r.tree.addNode(method, path,  http.HandlerFunc(handler))
+	r.tree.addNode(method, path, handler)
 }
 
 // Implements the from the interface Handler needed ServeHTTP(ResponseWriter, *Request) method.
@@ -102,9 +112,9 @@ func (n *node) addNode(method string, path string, handler http.Handler) {
 // @param - params: url.Values >> Named parameters to be added where needed when traversing
 // @return - *node(Pointer) >> Instance of node which is the parent node >> Place where the new component shall be added as child
 // @return - string >> String under which the new node shall be added
-// @example >> components [test :name test1] >> components [:name test1] >> components [test1]
+// @example >> components [website :name test1] >> components [:name test1] >> components [test1]
 func (n *node) traverse(components []string, params url.Values) (*node, string) {
-	// If component exists, it is always the parent component. exp: /tests/test1 >> /test = component
+	// If component exists, it is always the parent component. exp: /tests/test1 >> /website = component
 	// Like that, we can walk through the tree in recursive call
 	component := components[0]
 	// Iterate over all children of n, if none exists, directly return
@@ -129,7 +139,7 @@ func (n *node) traverse(components []string, params url.Values) (*node, string) 
 }
 
 // isSupportedHttpMethod checks whether a given method is supported by this router
-// @param - method: string >> The method which we have to test
+// @param - method: string >> The method which we have to website
 // @return - isSupported: bool >> The bool value whether the given method is supported or not
 func isSupportedHttpMethod(method string) (isSupported bool) {
 	isSupported = false
