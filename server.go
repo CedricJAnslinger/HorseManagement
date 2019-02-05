@@ -16,6 +16,11 @@ func main() {
 	log.Println("Server status: Creating router")
 	r := router.NewRouter(router.PathNotFoundHandler, router.MethodNotFoundHandler)
 
+	fs := http.FileServer(http.Dir("website"))
+
+	r.HandleFunc("GET", "/", router.Redirect("/calendar_month.html"))
+	r.AddDirectoryWeb("website", fs)	// Add directory website with the actual content of the website
+
 	// Configure server
 	log.Println("Server status: Creating server")
 	server := &http.Server{
