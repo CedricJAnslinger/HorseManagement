@@ -1,56 +1,49 @@
 package main
 
 import (
-	"fmt"
 	"github.com/CedricJAnslinger/HorseManagement/router"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"time"
 )
 
 func main() {
 	log.Println("Server status: Starting server")
 
-	// First, create a new router
+	// Create a new router
 	log.Println("Server status: Creating router")
-	r := router.NewRouter(PathNotFoundHandler, MethodNotFoundHandler)
+	r := router.NewRouter(router.PathNotFoundHandler, router.MethodNotFoundHandler)
 
-	// Not the final api, just for testing
-	r.Handle("GET", "/", HomeHandler)
-	r.Handle("GET", "/month", MonthHanlder)
-	r.Handle("GET", "/horses", HorsesHandler)
-	r.Handle("GET", "/horses/:name", HorseHandler)
+	// Configure server
+	log.Println("Server status: Creating server")
+	server := &http.Server{
+		Addr:         "0.0.0.0:8080",
+		// Set timeouts to avoid Slowloris attacks.
+		WriteTimeout: time.Second * 15,
+		ReadTimeout:  time.Second * 15,
+		IdleTimeout:  time.Second * 60,
+		Handler: r,
+	}
 
-	log.Println("Server status: Start listening")
-	http.ListenAndServe(":8080", r)
+	// Run server in a goroutine so that it doesn't block.
+	// TODO: Run on TLS
+	go func() {
+		if err := server.ListenAndServe(); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	log.Println("Server status: Running")
+
+	c := make(chan os.Signal, 1)
+	// Allow graceful shutdowns so that the os can safely shutting down the process
+	signal.Notify(c, os.Interrupt)
+
+	// Block until we receive the signal.
+	<-c
+
+	log.Println("Server status: offline")
+	os.Exit(0)
 }
-
-// PathNotFoundHandler handles a request for which no path exists.
-// @parameter - w: http.ResponseWriter >> Interface used by an HTTP handler to construct an HTTP response.
-// @parameter - r: http.Request(Pointer) >> Received HTTP request.
-func PathNotFoundHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Couldn't find path!")
-}
-
-// PathNotFoundHandler handles a request for which the wrong HTTPMethod was used
-// @parameter - w: http.ResponseWriter >> Interface used by an HTTP handler to construct an HTTP response.
-// @parameter - r: http.Request(Pointer) >> Received HTTP request.
-func MethodNotFoundHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Couldn't accept method on this path")
-}
-
-func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Project Horse-Management")
-}
-
-func MonthHanlder(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Display one month")
-}
-
-func HorsesHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Display all horses")
-}
-
-func HorseHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Display horse:  %s", r.Form.Get("name"))
-}
-
