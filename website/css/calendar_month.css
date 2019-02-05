@@ -1,0 +1,301 @@
+/***** Style calendar wrapper and calendar header *****/
+#calendarWrapper header * {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+#calendarWrapper header h5 {
+  font-weight: 400;
+  color: #868686;
+}
+
+#calendarWrapper header h3 {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+@media(max-width: 349px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 0 15px;
+  }
+}
+
+@media(min-width: 350px) and (max-width: 425px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 0 25px;
+  }
+}
+
+@media(min-width: 426px) and (max-width: 599px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 0 30px;
+  }
+}
+
+@media(min-width: 600px) and (max-width: 799px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 30px 15;
+  }
+}
+
+@media(min-width: 800px) and (max-width: 1199px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 30px;
+  }
+}
+
+@media(min-width: 1200px) {
+  #layoutWrapper #calendarWrapper {
+    padding: 40px;
+  }
+}
+/***** Style calendar and calendarHeader *****/
+#calendar {
+  margin: 20px 0;
+}
+
+#calendar #calendarHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  margin-bottom: 15px;
+  font-family: "Open Sans", sans-serif;
+  color: #868686;
+}
+
+#calendar #calendarHeader .calendarHeaderMobile {
+  font-size: 14px;
+}
+
+@media(max-width: 599px) {
+  #calendarWrapper header h1 {
+    display: none;
+  } 
+  
+  #calendarWrapper header .yearDesktop {
+    display: none;
+  }
+}
+
+@media(min-width: 600px) {
+  #calendarWrapper header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+  }
+  
+  #calendarWrapper header .yearMobile {
+    display: none;
+  }
+
+  #calendarWrapper header #calendarSwitchTime {
+    text-align: center;
+  }
+
+  #calendarWrapper #calendarSwitchTime .calendarSwitchTimeMonth {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 130px;
+  }
+
+  #calendarWrapper #calendarSwitchTime .switchMonth:first-of-type {
+    transform: rotate(180deg);
+  }
+
+  #calendarWrapper #calendarSwitchTime .switchMonth {
+    height: 15px;
+  }
+}
+
+@media(max-width: 799px) {
+  #calendar #calendarHeader .calendarHeader {
+    display: none;
+  }
+}
+
+@media(min-width: 800px) {
+  #calendar #calendarHeader .calendarHeaderMobile {
+    display: none;
+  }
+
+  #calendar #calendarHeader .calendarHeader {
+    font-size: 14px;
+  }
+}
+
+@media(max-width: 999px) {
+  #calendarWrapper header #calendarSwitchView {
+    display: none;
+  }
+}
+
+@media(min-width: 1000px) {
+  #calendarWrapper header #calendarSwitchView {
+    background-color: #F8F8F8;
+    border-radius: 20px;
+  }
+
+  header #calendarSwitchView div {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 5px 15px;
+    cursor: pointer;
+  }
+
+  header #calendarSwitchView div.active {
+    background-color: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  }
+
+}
+
+/***** Style calendarGrid *****/
+#calendar #calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-row-gap: 15px;
+  grid-column-gap: 5px;
+  justify-items: center;
+  margin-bottom: 20px;
+}
+
+/***** Style calendarGridItem *****/
+#calendar #calendarGrid .calendarGridItem {
+  font-family: "Open Sans", sans-serif;
+}
+
+#calendarGrid .calendarGridItem .calendarItemDate {
+  font-weight: 300;
+  color: #868686;
+}
+
+#calendarGrid .calendarGridItem.active .calendarItemDate {
+  display: block;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #EF9BD1;
+  text-align: center;
+}
+
+@media(max-width: 599px) {
+  #calendarGrid .calendarGridItem.active .calendarItemDate {
+    width: 22px;
+    height: 22px;
+  }
+
+  #calendarGrid .calendarGridItem .calendarTimeSlot {
+    display: none;
+  }
+}
+
+@media(min-width: 600px) {
+  .calendarGridItem .calendarTimeSlot {
+    margin-top: 5px; 
+    border-radius: 5px;
+    padding: 2px 5px;
+    color: #868686;
+  }
+
+  .calendarGridItem .calendarTimeSlot span {
+    display: inline-block;
+  }
+}
+
+@media(min-width: 600px) and (max-width: 999px) {
+  .calendarGridItem .calendarTimeSlot span, .calendarGridItem .calendarItemDate {
+    font-size: 12px;
+  }
+
+  #calendarGrid .calendarGridItem.active .calendarItemDate {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+@media(max-width: 999px) {
+  .calendarGridItem .calendarTimeSlotWeek {
+    display: none;
+  }
+}
+
+@media(min-width: 1000px) {
+  .calendarGridItem .calendarTimeSlot span, .calendarGridItem .calendarItemDate {
+    font-size: 14px;
+  }
+
+  #calendarGrid .calendarGridItem.active .calendarItemDate {
+    width: 20px;
+    height: 20px;
+    margin-top: -1px;
+  }
+
+  .calendarGridItem .calendarTimeSlotWeek {
+    margin: 10px 0 30px 0; 
+    border-radius: 5px;
+    padding: 15px;
+    color: #868686;
+  }
+
+  .calendarGridItem .calendarTimeSlotWeek span {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .calendarGridItem .calendarTimeSlotWeek span:first-of-type {
+    margin-top: 0;
+  }
+
+}
+
+/***** Style calendarMobileCards *****/
+#calendar #calendarMobileCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 25px;
+  grid-template-rows: repeat(auto, auto);
+  grid-row-gap: 25px;
+}
+
+#calendar #calendarMobileCards .calendarMobileCard {
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+#calendar #calendarMobileCards .calendarMobileCard span {
+  display: block;
+  margin-bottom: 3px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  color: #868686;
+}
+
+#calendar #calendarMobileCards .calendarMobileCard span:last-of-type {
+  margin-bottom: 0;
+}
+
+@media(max-width: 349px) {
+  #calendar #calendarMobileCards .calendarMobileCard {
+    padding: 10px;
+  }
+
+  #calendar #calendarMobileCards .calendarMobileCard span {
+    font-size: 14px;
+  }
+}
+
+@media(min-width: 350px) and (max-width: 599px) {
+  #calendar #calendarMobileCards .calendarMobileCard {
+    padding: 10px 15px;
+  }
+
+  #calendar #calendarMobileCards .calendarMobileCard span {
+    font-size: 16px;
+  }
+}
+
+@media(min-width: 600px) {
+  #calendar #calendarMobileCards {
+    display: none;
+  }
+}
