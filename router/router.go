@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -150,4 +152,38 @@ func isSupportedHttpMethod(method string) (isSupported bool) {
 		}
 	}
 	return isSupported
+}
+
+
+// AddDirectoryWeb makes a complete directory accessible by adding all elements to the api
+// @param - directory: string >> The path to the directory we want to add
+// @param - handler: http.Handler: The actual handler which is getting executed at this endpoint.
+func (r *Router) AddDirectoryWeb(directory string, handler http.Handler) {
+	listOfElements := make([]string, 0)
+
+	err := filepath.Walk(directory, func(path string, f os.FileInfo, err error) error {
+		// Ignore all directories and hidden files
+		if f.IsDir() || f.Name()[0] == '.' {
+			return nil
+		}
+		listOfElements = append(listOfElements, strings.TrimPrefix(path, directory))
+		return nil
+	})
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, file := range listOfElements {
+		r.Handle("GET", file, handler)
+	}
+}
+
+// Redirect wraps a func(w http.ResponseWriter, r *http.Request) around a http.Redirect so that it can be used
+// as handler for router.HandleFunc
+// @param - newPath: string >> The path we want to redirect to
+func Redirect(newPath string) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, newPath, http.StatusMovedPermanently)
+	}
 }
