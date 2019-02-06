@@ -228,7 +228,7 @@
   #calendarGrid .calendarGridItem.active .calendarItemDate {
     width: 20px;
     height: 20px;
-    margin-top: -1px;
+    margin-top: 2px;
   }
 
   .calendarGridItem .calendarTimeSlotWeek {
