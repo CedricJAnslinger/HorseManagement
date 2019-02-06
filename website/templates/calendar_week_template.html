@@ -1,0 +1,81 @@
+{{define "headline"}}Calendar{{end}}
+
+{{define "websiteContent"}}
+    <!-- Calendar -->
+    <div id="calendarWrapper">
+        <header>
+            <h1 class="colorRose">Calendar</h1>
+
+            <div id="calendarSwitchTime">
+                <h5 class="yearMobile">2019</h5>
+                <div class="calendarSwitchTimeMonth">
+                    <img class="switchMonth yearDesktop" src="assets/switchMonthIcon.png" />
+                    <h3 class="colorRose">January</h3>
+                    <img class="switchMonth yearDesktop" src="assets/switchMonthIcon.png" />
+                </div>
+                <h5 class="yearDesktop">{{.KWWeek}}</h5>
+            </div>
+
+            <div id="calendarSwitchView">
+                <a href="calendar_week.html" class="colorRose active">Week</a>
+                <a href="calendar_month.html" class="colorRose">Month</a>
+            </div>
+
+        </header>
+        <div id="calendar">
+            <!-- Calendar header -->
+            <div id="calendarHeader">
+                <div>
+                    <span class="calendarHeader">Monday</span>
+                </div>
+                <div>
+                    <span class="calendarHeader">Tuesday</span>
+                </div>
+                <div>
+                    <span class="calendarHeader">Wednesday</span>
+                </div>
+                <div>
+                    <span class="calendarHeader">Thursday</span>
+                </div>
+                <div>
+                    <span class="calendarHeader">Friday</span>
+                </div>
+                <div>
+                    <span class="calendarHeader">Saturday</span>
+                </div>
+                <div>
+                    <span class="calendarHeader">Sunday</span>
+                </div>
+            </div>
+
+            <!-- Calendar grid -->
+            <div id="calendarGrid">
+            {{range .Days}}
+                {{if .IsActive}}
+                    <div class="calendarGridItem active">
+                {{else}}
+                    <div class="calendarGridItem ">
+                {{end}}
+                    <span class="calendarItemDate">{{.DateDay}}</span>
+                    <div class="calendarTimeSlotWeek" style="background-color: #E0FFF2;">
+                        <span>Parvenuee</span>
+                        <span>Lenita Behncke</span>
+                        <span>Jan-Cedric Anslinger</span>
+                    </div>
+                    <div class="calendarTimeSlotWeek" style="background-color: #FFEDFF">
+                        <span>Parvenuee</span>
+                        <span>Lenita Behncke</span>
+                        <span>Jan-Cedric Anslinger</span>
+                    </div>
+                    <div class="calendarTimeSlotWeek" style="background-color: #E5F5FC;">
+                        <span>Parvenuee</span>
+                        <span>Lenita Behncke</span>
+                        <span>Jan-Cedric Anslinger</span>
+                    </div>
+                </div>
+            {{end}}
+            </div>
+
+        </div>
+    </div>
+{{end}}

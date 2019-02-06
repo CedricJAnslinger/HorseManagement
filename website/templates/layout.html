@@ -1,0 +1,86 @@
+{{define "layout"}}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{.PageTitle}}</title>
+
+    <!-- Import stylesheets -->
+    <link href="style.css" rel="stylesheet">
+    <link href="css/navigation.css" rel="stylesheet">
+    <link href="css/calendar_month.css" rel="stylesheet">
+
+    <!-- Import fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600|family=Open+Sans" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Side Navigation-->
+<nav id="sideNavigation">
+    <a id="toggleNavigationTablet" class="toggleNavigation" onclick="toggleNavigation();">
+        <span class="iconBar"></span>
+        <span class="iconBar"></span>
+        <span class="iconBar"></span>
+    </a>
+    <h1>Lenite Behncke</h1>
+    <ul>
+        <li class="active">
+            <a href="calendar_month.html">
+                <img src="assets/calendarIconActive.png" />
+                <span>Calendar</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="assets/equestrian.png" />
+                <span>Equestrians</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="assets/horse.png" />
+                <span>Horeses</span>
+            </a>
+        </li>
+        <li>
+            <a>
+                <img src="assets/logout.png" alt="Logout">
+                <span>Logout</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<section id="layoutWrapper">
+    <!-- Header mobile -->
+    <div id="headerMobile">
+        <a id="toggleNavigationMobile" class="toggleNavigation" onclick="toggleNavigation();">
+            <span class="iconBar"></span>
+            <span class="iconBar"></span>
+            <span class="iconBar"></span>
+        </a>
+        <h1 class="colorRose">{{template "headline"}}</h1>
+    </div>
+
+    {{template "websiteContent" .}}
+</section>
+
+<script>
+    const toggleNavigation = () => {
+        const sideNavigation = document.getElementById("sideNavigation");
+        const navigationButtonMobile = document.getElementById("toggleNavigationMobile");
+        const navigationButtonTablet = document.getElementById("toggleNavigationTablet");
+        sideNavigation.classList.toggle("open");
+        navigationButtonMobile.classList.toggle("open");
+        navigationButtonTablet.classList.toggle("open");
+    }
+</script>
+</body>
+
+</html>
+{{end}}
