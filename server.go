@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/CedricJAnslinger/HorseManagement/calendar"
 	"github.com/CedricJAnslinger/HorseManagement/router"
 	"log"
 	"net/http"
@@ -15,11 +16,13 @@ func main() {
 	// Create a new router
 	log.Println("Server status: Creating router")
 	r := router.NewRouter(router.PathNotFoundHandler, router.MethodNotFoundHandler)
-
+	// Create a fileServer so we can serve our assets
 	fs := http.FileServer(http.Dir("website"))
 
+	// Definition of our api
+	r.AddDirectoryWeb("website", fs) // make assets accessible
 	r.HandleFunc("GET", "/", router.Redirect("/calendar_month.html"))
-	r.AddDirectoryWeb("website", fs)	// Add directory website with the actual content of the website
+	r.HandleFunc("GET", "/calendar_week", calendar.WeekController)
 
 	// Configure server
 	log.Println("Server status: Creating server")
