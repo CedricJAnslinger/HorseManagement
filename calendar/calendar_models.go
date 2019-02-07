@@ -12,5 +12,6 @@ type CalendarWeekPage struct {
 	Month 		string 	// The month the selected week is in
 	KWWeek		string	// The week of the year
 	Days     	[]Day	// All days of this week
-	// TODO: Add prev link and next link
+	PrevLink	string  // Link to the previous week
+	NextLink	string  // Link to the next week
 }
