@@ -15,3 +15,12 @@ type CalendarWeekPage struct {
 	PrevLink	string  // Link to the previous week
 	NextLink	string  // Link to the next week
 }
+
+type CalendarMonthPage struct {
+	PageTitle 	string	// Title of the page
+	Year		string	// The year the selected month is in
+	Month 		string 	// The selected month
+	Days     	[]Day	// All days of this week
+	PrevLink	string  // Link to the previous week
+	NextLink	string  // Link to the next week
+}
