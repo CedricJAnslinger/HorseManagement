@@ -6,9 +6,9 @@ Student project - A custom calendar with a focus on usability to manage multiple
 The installation is quite simple. First, you've to install go.
 Here is the link to the official go page on how to install go: https://golang.org/doc/install
 
-Then, you've to download the master and copy it into your src folder
+Then, you've to download the master and copy it into your src folder.
 At last, navigate into the folder and run "go run server.go"
-Please make sure that port 8080 is free, if not, adapt the port in server.go
+Please make sure that port 8080 is free, if not, adapt the port in server.go.
 To stop the program, press ctrl + c
 
 ###Features ready
