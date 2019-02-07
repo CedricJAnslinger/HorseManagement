@@ -99,12 +99,16 @@
     width: 130px;
   }
 
-  #calendarWrapper #calendarSwitchTime .switchMonth:first-of-type {
+  #calendarWrapper #calendarSwitchTime .switchMonth:first-of-type img {
     transform: rotate(180deg);
   }
 
   #calendarWrapper #calendarSwitchTime .switchMonth {
     height: 15px;
+  }
+
+  #calendarWrapper #calendarSwitchTime .switchMonth img {
+    height: 100%;
   }
 }
 
