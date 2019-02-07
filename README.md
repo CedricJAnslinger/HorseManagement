@@ -14,7 +14,7 @@ To stop the program, press ctrl + c
 ###Features ready
 * Website is complete responsive
 * Fully functional router, written without any additional framework or library, just the standard library.
-* Calendar which shows all dates correct and highlights the current day (week and month view)
+* Calendar which shows all dates correct and highlights the current day (week and month view), also no additional framework or library
 
 ###Features to be implemented
 * Change horse or equestrian of a slot
