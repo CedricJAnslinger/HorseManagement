@@ -1,6 +1,10 @@
 package calendar
 
 import (
+	"errors"
+	"html/template"
+	"log"
+	"strconv"
 	"time"
 )
 
@@ -12,10 +16,14 @@ func getDaysOfAWeek(year int, week int) []Day {
 	days := make([]Day, 7)
 	monday := getFirstDayOfAWeek(year, week)
 
-	// TODO: Check isActive
 	for i, _ := range days {
 		newDate := monday.AddDate(0, 0, i)
-		days[i] = Day{DateDay: newDate.Day(), Month: newDate.Month().String(), IsActive: false}
+		day := Day{DateDay: newDate.Day(), Month: newDate.Month().String(), IsActive: false}
+		// Set day active if its today's date
+		if time.Now().Day() == day.DateDay && time.Now().Month().String() == day.Month {
+			day.IsActive = true
+		}
+		days[i] = day
 	}
 
 	return days
@@ -42,4 +50,86 @@ func getFirstDayOfAWeek(year int, week int) time.Time {
 	t = t.AddDate(0, 0, (week-w)*7)
 
 	return t
+}
+
+// getCalendarWeekTemplate returns the template and the data to render calendar_week for a given week in a given year
+// @param - year: int >> The year of the week we want to get the first day from
+// @param - week: int >> The week we want to get the firs day from
+// @return - tmpl: *template.Template(Pointer) >> The combined template of layout and calendar_week_template to display the data
+// @return - data: interface >> The data needed to display the week
+// @return - err: error >> Potential error that could occur
+func getCalendarWeekTemplate(year int, week int) (tmpl *template.Template, data interface{}, err error) {
+	log.Println(year)
+	log.Println(week)
+	days := getDaysOfAWeek(year, week)
+
+	// Generate PrevLink
+	prevLink := generatePrevLinkWeek(year, week)
+	// Generate NextLink
+	nextLink := generateNextLinkWeek(year, week)
+
+	// Generate data for this page
+	data = CalendarWeekPage{
+		PageTitle: "Project Horse-Management | Week Calendar",
+		Year: strconv.Itoa(year),
+		Month: days[0].Month,
+		KWWeek: "KW " + strconv.Itoa(week) + ", " + strconv.Itoa(year),
+		Days: days,
+		PrevLink: prevLink,
+		NextLink: nextLink,
+	}
+
+	tmpl, err = template.ParseFiles("website/templates/calendar_week_template.html", "website/templates/layout.html")
+	if err != nil {
+		return nil,nil, errors.New("Couldn't Parse files, error: " + err.Error())
+	}
+
+	return tmpl, data, nil
+}
+
+// generatePrevLinkWeek returns the PrevLink for the calendar_week template
+// @param - year: int >> The year of the week we want to get the first day from
+// @param - week: int >> The week we want to get the firs day from
+// @return - string >> The actual link
+func generatePrevLinkWeek(year int, week int) string {
+	if week == 1 {
+		// Decide whether leap-year or not >> Leap-year if time to next 01.01 == 366
+		t1 := time.Date(year - 1, 1, 1, 0, 0, 0, 0, time.UTC)
+		t2 := time.Date(year, 1, 1, 0, 0, 0, 0, time.UTC)
+		amountOfDays := t2.Sub(t1).Hours() / 24
+		if amountOfDays == 366 {
+			// Leap year >> 53 weeks
+			return "/calendar_week/" + strconv.Itoa(year-1) + "/53"
+		}
+
+		return "/calendar_week/" + strconv.Itoa(year-1) + "/52"
+	}
+
+	return "/calendar_week/" + strconv.Itoa(year) + "/" + strconv.Itoa(week-1)
+}
+
+// generateNextLinkWeek returns the NextLink for the calendar_week template
+// @param - year: int >> The year of the week we want to get the first day from
+// @param - week: int >> The week we want to get the firs day from
+// @return - string >> The actual link
+func generateNextLinkWeek(year int, week int) string {
+	if week == 52 || week == 53 {
+		// Decide whether leap-year or not >> Leap-year if time to next 01.01 == 366
+		t1 := time.Date(year, 1, 1, 0, 0, 0, 0, time.UTC)
+		t2 := time.Date(year+1, 1, 1, 0, 0, 0, 0, time.UTC)
+		amountOfDays := t2.Sub(t1).Hours() / 24
+		if amountOfDays == 366 {
+			// Leap year
+			if week == 53 {
+				return "/calendar_week/" + strconv.Itoa(year+1) + "/1"
+			}
+
+			return "/calendar_week/" + strconv.Itoa(year) + "/53"
+		} else {
+			// No leap year >> no 53.th week exists
+			return "/calendar_week/" + strconv.Itoa(year+1) + "/1"
+		}
+	}
+
+	return "/calendar_week/" + strconv.Itoa(year) + "/" + strconv.Itoa(week+1)
 }
