@@ -1,7 +1,6 @@
 package calendar
 
 import (
-	"html/template"
 	"log"
 	"net/http"
 	"strconv"
@@ -15,7 +14,15 @@ func WeekDefaultController(w http.ResponseWriter, r *http.Request) {
 	// Simply generate data for current date and forward it to WeekController
 	today := time.Now()
 	yearToday, weekToday := today.ISOWeek()
-	WeekController(w, r, weekToday, yearToday)
+	// WeekController(w, r, weekToday, yearToday)
+	tmpl, data, err := getCalendarWeekTemplate(yearToday, weekToday)
+	if err != nil {
+		// TODO: Write to log
+		log.Println("Error on WeekDefaultController: ", err.Error())
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	tmpl.ExecuteTemplate(w, "layout", data)
 }
 
 // WeekController handles a request to display the week calendar for a given week in a given year.
@@ -23,21 +30,18 @@ func WeekDefaultController(w http.ResponseWriter, r *http.Request) {
 // @parameter - r: http.Request(Pointer) >> Received HTTP request.
 // @parameter - week: int >> The week number we want to display.
 // @parameter - year: int >> The year number to which week belongs to.
-func WeekController(w http.ResponseWriter, r *http.Request, week int, year int) {
-	days := getDaysOfAWeek(time.Now().Year(), week)
-
-	// Generate data for this page
-	data := CalendarWeekPage{
-		PageTitle: "Project Horse-Management | Week Calendar",
-		Year: strconv.Itoa(year),
-		Month: days[0].Month,
-		KWWeek: "KW " + strconv.Itoa(week) + ", " + strconv.Itoa(year),
-		Days: days,
+func WeekController(w http.ResponseWriter, r *http.Request) {
+	year, err := strconv.Atoi(r.Form.Get("year"))
+	week, err := strconv.Atoi(r.Form.Get("week"))
+	if err != nil {
+		log.Println("Error on WeekController: ", err.Error())
+		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
-	tmpl, err := template.ParseFiles("website/templates/calendar_week_template.html", "website/templates/layout.html")
+	tmpl, data, err := getCalendarWeekTemplate(year, week)
 	if err != nil {
-		log.Fatal(err)
+		log.Println("Error on WeekController: ", err.Error())
+		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
 	tmpl.ExecuteTemplate(w, "layout", data)
