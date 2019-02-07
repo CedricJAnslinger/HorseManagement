@@ -7,7 +7,7 @@
             <h1 class="colorRose">Calendar</h1>
 
             <div id="calendarSwitchTime">
-                <h5 class="yearMobile">2019</h5>
+                <h5 class="yearMobile">{{.Year}}</h5>
                 <div class="calendarSwitchTimeMonth">
                     <a class="switchMonth" href="{{.PrevLink}}">
                         <img class="yearDesktop" src="/assets/switchMonthIcon.png" />
@@ -22,7 +22,7 @@
 
             <div id="calendarSwitchView">
                 <a href="/calendar_week" class="colorRose active">Week</a>
-                <a href="calendar_month.html" class="colorRose">Month</a>
+                <a href="/calendar_month" class="colorRose">Month</a>
             </div>
 
         </header>

@@ -3,7 +3,6 @@ package calendar
 import (
 	"errors"
 	"html/template"
-	"log"
 	"strconv"
 	"time"
 )
@@ -59,8 +58,6 @@ func getFirstDayOfAWeek(year int, week int) time.Time {
 // @return - data: interface >> The data needed to display the week
 // @return - err: error >> Potential error that could occur
 func getCalendarWeekTemplate(year int, week int) (tmpl *template.Template, data interface{}, err error) {
-	log.Println(year)
-	log.Println(week)
 	days := getDaysOfAWeek(year, week)
 
 	// Generate PrevLink
@@ -132,4 +129,81 @@ func generateNextLinkWeek(year int, week int) string {
 	}
 
 	return "/calendar_week/" + strconv.Itoa(year) + "/" + strconv.Itoa(week+1)
+}
+
+// getDaysOfAMonth returns the days of a month ready to render them in the month-template
+// @parameter - year: int >> The year number to which month belongs to.
+// @parameter - month: int >> The month number we want to get the days from.
+// @return - *[]Day >> All days of the month, each wrapped in a Day-struct.
+func getDaysOfAMonth(year int, month int) []Day {
+	days := make([]Day, 35) // 35 = max amount of days in one calendar view
+
+	newDate:= time.Date(year, time.Month(month), 1, 0, 0, 0, 0, time.UTC)
+	newDate = newDate.AddDate(0, 0, -int(newDate.Weekday()))		// Subtract one too much cause we add 1 in the loop
+
+	for i, _ := range days {
+		newDate = newDate.AddDate(0, 0, 1)
+		day := Day{DateDay: newDate.Day(), Month: newDate.Month().String(), IsActive: false}
+		// Set day active if its today's date
+		if time.Now().Day() == day.DateDay && time.Now().Month().String() == day.Month {
+			day.IsActive = true
+		}
+		days[i] = day
+	}
+
+	return days
+}
+
+// getCalendarMonthTemplate returns the template and the data to render calendar_month for a given week in a given year
+// @param - year: int >> The year of the month
+// @param - month: int >> The month we want to display
+// @return - tmpl: *template.Template(Pointer) >> The combined template of layout and calendar_month_template to display the data
+// @return - data: interface >> The data needed to display the month
+// @return - err: error >> Potential error that could occur
+func getCalendarMonthTemplate(year int, month int) (tmpl *template.Template, data interface{}, err error) {
+	days := getDaysOfAMonth(year, month)
+
+	// Generate PrevLink
+	prevLink := generatePrevLinkMonth(year, month)
+	// Generate NextLink
+	nextLink :=generateNextLinkMonth(year, month)
+
+	// Generate data for this page
+	data = CalendarMonthPage{
+		PageTitle: "Project Horse-Management | Month Calendar",
+		Year: strconv.Itoa(year),
+		Month: days[8].Month,
+		Days: days,
+		PrevLink: prevLink,
+		NextLink: nextLink,
+	}
+
+	tmpl, err = template.ParseFiles("website/templates/calendar_month_template.html", "website/templates/layout.html")
+	if err != nil {
+		return nil,nil, errors.New("Couldn't Parse files, error: " + err.Error())
+	}
+
+	return tmpl, data, nil
+}
+
+// generatePrevLinkMonth returns the PrevLink for the calendar_month template
+// @param - year: int >> The year of the month
+// @param - month: int >> The month we want to display
+// @return - string >> The actual link
+func generatePrevLinkMonth(year int, month int) string {
+	if month == 1 {
+		return "/calendar_month/" + strconv.Itoa(year-1) + "/12"
+	}
+	return "/calendar_month/" + strconv.Itoa(year) + "/" + strconv.Itoa(month-1)
+}
+
+// generatePrevLinkMonth returns the NextLink for the calendar_month template
+// @param - year: int >> The year of the month
+// @param - month: int >> The month we want to display
+// @return - string >> The actual link
+func generateNextLinkMonth(year int, month int) string {
+	if month == 12 {
+		return "/calendar_month/" + strconv.Itoa(year+1) + "/1"
+	}
+	return "/calendar_month/" + strconv.Itoa(year) + "/" + strconv.Itoa(month+1)
 }
