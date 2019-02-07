@@ -21,9 +21,11 @@ func main() {
 
 	// Definition of our api
 	r.AddDirectoryWeb("website", fs) // make assets accessible
-	r.HandleFunc("GET", "/", router.Redirect("/calendar_month.html"))
+	r.HandleFunc("GET", "/", router.Redirect("/calendar_month"))
 	r.HandleFunc("GET", "/calendar_week", calendar.WeekDefaultController)
 	r.HandleFunc("GET", "/calendar_week/:year/:week", calendar.WeekController)
+	r.HandleFunc("GET", "/calendar_month", calendar.MonthDefaultController)
+	r.HandleFunc("GET", "/calendar_month/:year/:month", calendar.MonthController)
 
 	// Configure server
 	log.Println("Server status: Creating server")
