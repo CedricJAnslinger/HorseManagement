@@ -9,15 +9,19 @@
             <div id="calendarSwitchTime">
                 <h5 class="yearMobile">2019</h5>
                 <div class="calendarSwitchTimeMonth">
-                    <img class="switchMonth yearDesktop" src="assets/switchMonthIcon.png" />
-                    <h3 class="colorRose">January</h3>
-                    <img class="switchMonth yearDesktop" src="assets/switchMonthIcon.png" />
+                    <a class="switchMonth" href="{{.PrevLink}}">
+                        <img class="yearDesktop" src="/assets/switchMonthIcon.png" />
+                    </a>
+                    <h3 class="colorRose">{{.Month}}</h3>
+                    <a class="switchMonth" href="{{.NextLink}}">
+                        <img class="yearDesktop" src="/assets/switchMonthIcon.png" />
+                    </a>
                 </div>
                 <h5 class="yearDesktop">{{.KWWeek}}</h5>
             </div>
 
             <div id="calendarSwitchView">
-                <a href="calendar_week.html" class="colorRose active">Week</a>
+                <a href="/calendar_week" class="colorRose active">Week</a>
                 <a href="calendar_month.html" class="colorRose">Month</a>
             </div>
 
