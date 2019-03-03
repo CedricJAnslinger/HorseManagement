@@ -17,9 +17,9 @@ func getDaysOfAWeek(year int, week int) []Day {
 
 	for i, _ := range days {
 		newDate := monday.AddDate(0, 0, i)
-		day := Day{DateDay: newDate.Day(), Month: newDate.Month().String(), IsActive: false}
+		day := Day{DateDay: newDate.Day(), Month: newDate.Month().String(), Year: newDate.Year(), IsActive: false}
 		// Set day active if its today's date
-		if time.Now().Day() == day.DateDay && time.Now().Month().String() == day.Month {
+		if time.Now().Day() == day.DateDay && time.Now().Month().String() == day.Month && time.Now().Year() == newDate.Year(){
 			day.IsActive = true
 		}
 		days[i] = day
@@ -143,9 +143,9 @@ func getDaysOfAMonth(year int, month int) []Day {
 
 	for i, _ := range days {
 		newDate = newDate.AddDate(0, 0, 1)
-		day := Day{DateDay: newDate.Day(), Month: newDate.Month().String(), IsActive: false}
+		day := Day{DateDay: newDate.Day(), Month: newDate.Month().String(), Year: newDate.Year(), IsActive: false}
 		// Set day active if its today's date
-		if time.Now().Day() == day.DateDay && time.Now().Month().String() == day.Month {
+		if time.Now().Day() == day.DateDay && time.Now().Month().String() == day.Month  && time.Now().Year() == day.Year{
 			day.IsActive = true
 		}
 		days[i] = day
